@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>owo</title>
+    <meta name="description" content="JavaScript - A-Frame School" />
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-physics-system@1.4.0/dist/aframe-physics-system.min.js"></script>
+  </head>
+
+  <body>
+    <a-scene physics="debug: true; driver: ammo">
+      <a-sky color="skyblue"></a-sky>
+      <a-plane
+        position="0.711 -3 0"
+        rotation="-90 0 0"
+        width="1000"
+        height="1000"
+        color="brown"
+      ></a-plane>
+      <a-entity
+        gltf-model="https://cdn.glitch.global/a9211039-2a20-477d-8918-1d1ad2702aad/build.glb?v=1711437977418"
+        static-body="shape: hull; friction: 0.8"
+      ></a-entity>
+
+      <a-camera position="0 3 3">
+        <a-entity
+          cursor
+          geometry="primitive: box; width: 0.05; height: 0.05; depth: 0.1"
+          material="color: red;"
+          position="0 .5 -2"
+        ></a-entity>
+      </a-camera>
+
+      <!-- Rotating Cube -->
+      <a-entity
+        id="rotatingBox"
+        gltf-model="https://cdn.glitch.global/a9211039-2a20-477d-8918-1d1ad2702aad/cube3.glb?v=1711399490568"
+        position="-25 3 0.2"
+        rotation="0 90 0"
+        color="red"
+      ></a-entity>
+
+      <!-- Card 1 -->
+      <a-entity
+        id="card1"
+        gltf-model="https://cdn.glitch.global/a9211039-2a20-477d-8918-1d1ad2702aad/card.glb?v=1711420139576"
+        position="-20 3 -13"
+        rotation="0 90 0"
+        animation__hover="property: scale; from: 1 1 1; to: 1.2 1.2 1.2; startEvents: mouseenter; dur: 200"
+        animation__leave="property: scale; to: 1 1 1; startEvents: mouseleave; dur: 200"
+      ></a-entity>
+
+      <!-- Card 2 -->
+      <a-plane
+        id="card2"
+        gltf-model="https://cdn.glitch.global/a9211039-2a20-477d-8918-1d1ad2702aad/card2.glb?v=1711420979119"
+        rotation="0 90 0"
+        position="-17 3 -13"
+        animation__hover="property: scale; from: 1 1 1; to: 1.2 1.2 1.2; startEvents: mouseenter; dur: 200"
+        animation__leave="property: scale; to: 1 1 1; startEvents: mouseleave; dur: 200"
+      ></a-plane>
+
+      <!-- Dialog Box for Card 1 -->
+      <a-plane
+        id="dialogBoxCard1"
+        gltf-model="https://cdn.glitch.global/a9211039-2a20-477d-8918-1d1ad2702aad/dialog1.glb?v=1711429652697"
+        position="-18.5 3 -12"
+        rotation="0 270 0"
+        visible="false"
+      >
+      </a-plane>
+
+      <!-- Dialog Box for Card 2 -->
+      <a-plane
+        id="dialogBoxCard2"
+        gltf-model="https://cdn.glitch.global/a9211039-2a20-477d-8918-1d1ad2702aad/dialog2.glb?v=17114298086637"
+        position="-18.5 3 -12"
+        rotation="0 270 0"
+        visible="false"
+      >
+      </a-plane>
+
+      <!-- book-->
+      <a-assets>
+        <img
+          id="book-cover"
+          src="https://cdn.glitch.global/a9211039-2a20-477d-8918-1d1ad2702aad/cover.jpg?v=1711432543192"
+        />
+        <img
+          id="page1"
+          src="https://cdn.glitch.global/a9211039-2a20-477d-8918-1d1ad2702aad/p5.jpg?v=1711432215508"
+        />
+        <img
+          id="page2"
+          src="https://cdn.glitch.global/a9211039-2a20-477d-8918-1d1ad2702aad/p6.jpg?v=1711432222546"
+        />
+        <img
+          id="page3"
+          src="https://cdn.glitch.global/a9211039-2a20-477d-8918-1d1ad2702aad/p3.jpg?v=1711432210338"
+        />
+        <img
+          id="page4"
+          src="https://cdn.glitch.global/a9211039-2a20-477d-8918-1d1ad2702aad/p1.jpg?v=1711432198762"
+        />
+        <img
+          id="page5"
+          src="https://cdn.glitch.global/a9211039-2a20-477d-8918-1d1ad2702aad/p2.jpg?v=1711432200720"
+        />
+        <img
+          id="page6"
+          src="https://cdn.glitch.global/a9211039-2a20-477d-8918-1d1ad2702aad/p4.jpg?v=1711432211258"
+        />
+      </a-assets>
+
+      <a-entity id="book" position="-20 3 14" rotation="0 180 0">
+        <a-plane
+          id="cover"
+          src="#book-cover"
+          width="1.5"
+          height="2"
+          position="0 0 0.01"
+          event-set__mouseenter="scale: 1.2 1.2 1"
+          event-set__mouseleave="scale: 1 1 1"
+        ></a-plane>
+
+        <a-plane
+          id="page-1"
+          src="#page1"
+          width="1.5"
+          height="2"
+          position="0 0 0"
+          visible="false"
+          event-set__mouseenter="material.opacity: 0.8"
+          event-set__mouseleave="material.opacity: 1"
+        ></a-plane>
+
+        <a-plane
+          id="page-2"
+          src="#page2"
+          width="1.5"
+          height="2"
+          position="0 0 0"
+          visible="false"
+          event-set__mouseenter="material.opacity: 0.8"
+          event-set__mouseleave="material.opacity: 1"
+        ></a-plane>
+
+        <a-plane
+          id="page-3"
+          src="#page3"
+          width="1.5"
+          height="2"
+          position="0 0 0"
+          visible="false"
+          event-set__mouseenter="material.opacity: 0.8"
+          event-set__mouseleave="material.opacity: 1"
+        ></a-plane>
+
+        <a-plane
+          id="page-4"
+          src="#page4"
+          width="1.5"
+          height="2"
+          position="0 0 0"
+          visible="false"
+          event-set__mouseenter="material.opacity: 0.8"
+          event-set__mouseleave="material.opacity: 1"
+        ></a-plane>
+
+        <a-plane
+          id="page-5"
+          src="#page5"
+          width="1.5"
+          height="2"
+          position="0 0 0"
+          visible="false"
+          event-set__mouseenter="material.opacity: 0.8"
+          event-set__mouseleave="material.opacity: 1"
+        ></a-plane>
+
+        <a-plane
+          id="page-6"
+          src="#page6"
+          width="1.5"
+          height="2"
+          position="0 0 0"
+          visible="false"
+          event-set__mouseenter="material.opacity: 0.8"
+          event-set__mouseleave="material.opacity: 1"
+        ></a-plane>
+      </a-entity>
+
+      <script>
+        const rotatingBox = document.querySelector("#rotatingBox");
+        const card1 = document.querySelector("#card1");
+        const card2 = document.querySelector("#card2");
+        const dialogBoxCard1 = document.querySelector("#dialogBoxCard1");
+        const dialogBoxCard2 = document.querySelector("#dialogBoxCard2");
+
+        let rotationIndex = 0;
+        const rotations = [
+          { from: "0 90 0", to: "0 180 0" },
+          { from: "0 180 0", to: "0 270 0" },
+          { from: "0 270 0", to: "0 360 0" },
+          { from: "0 360 0", to: "0 90 0" },
+        ];
+
+        rotatingBox.addEventListener("click", () => {
+          const rotation = rotations[rotationIndex];
+          rotatingBox.setAttribute("animation", {
+            property: "rotation",
+            from: rotation.from,
+            to: rotation.to,
+            dur: 500,
+          });
+
+          rotationIndex = (rotationIndex + 1) % rotations.length;
+        });
+
+        card1.addEventListener("click", () => {
+          showDialogBox(dialogBoxCard1);
+        });
+
+        card2.addEventListener("click", () => {
+          showDialogBox(dialogBoxCard2);
+        });
+
+        function showDialogBox(dialogBox) {
+          dialogBox.setAttribute("visible", true);
+          card1.setAttribute("visible", false);
+          card2.setAttribute("visible", false);
+        }
+
+        dialogBoxCard1.addEventListener("click", () => {
+          hideDialogBox();
+        });
+
+        dialogBoxCard2.addEventListener("click", () => {
+          hideDialogBox();
+        });
+
+        function hideDialogBox() {
+          dialogBoxCard1.setAttribute("visible", false);
+          dialogBoxCard2.setAttribute("visible", false);
+          card1.setAttribute("visible", true);
+          card2.setAttribute("visible", true);
+        }
+
+        const book = document.querySelector("#book");
+        const cover = document.querySelector("#cover");
+        const pages = Array.from(book.querySelectorAll("a-plane:not(#cover)"));
+        let currentPageIndex = 0;
+
+        function showPage(index) {
+          pages.forEach((page, i) => {
+            page.setAttribute("visible", i === index);
+          });
+        }
+
+        function switchPage() {
+          currentPageIndex = (currentPageIndex + 1) % pages.length;
+          showPage(currentPageIndex);
+
+          if (currentPageIndex === 0) {
+            cover.setAttribute("visible", true);
+          } else {
+            cover.setAttribute("visible", false);
+          }
+        }
+
+        cover.addEventListener("click", switchPage);
+
+        pages.forEach((page) => {
+          page.addEventListener("click", switchPage);
+        });
+      </script>
+    </a-scene>
+  </body>
+</html>
